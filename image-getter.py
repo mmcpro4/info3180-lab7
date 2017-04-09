@@ -27,3 +27,4 @@ def image_url(url):
     for img in soup.findAll("img", src=True):
         print image % urlparse.urljoin(url, img["src"])
     return images
+
