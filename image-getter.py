@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import urlparse
 
-url = "https://www.walmart.com/ip/54649026"
+url = "https://www.amazon.com/dp/B010U3XVMU/ref=twister_B011TUYQOU?_encoding=UTF8&psc=1&tag=gdext-20"
 result = requests.get(url)
 soup = BeautifulSoup(result.text, "html.parser")
 
@@ -19,8 +19,11 @@ if thumbnail_spec and thumbnail_spec['href']:
     print thumbnail_spec['href']
     print ''
 
-
-image = """<img src="%s"><br />"""
-for img in soup.findAll("img", src=True):
-   print image % urlparse.urljoin(url, img["src"])
-   print ''
+def image_url(url):
+    result=requests.get(url)
+    b_soup=BeautifulSoup.BeautifulSoup(result.text)
+    images=[]
+    image = """<img src="%s"><br />"""
+    for img in soup.findAll("img", src=True):
+        print image % urlparse.urljoin(url, img["src"])
+    return images
